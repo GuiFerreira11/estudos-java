@@ -12,5 +12,14 @@ public class Main {
     System.out.println("O filme está incluso no seu plano: " + incluidoNoPlano);
     System.out.println("A nota do filme na plataforma é de: " + notaDoFilme);
 
+    double media = (9.8 + 6.3 + 7.0) / 3;
+    System.out.println(media);
+
+    String sinopse = "Filme de aventura com galã dos anos 1980";
+
+    System.out.println(sinopse);
+
+    int classificacao = (int) media / 2;
+    System.out.println(classificacao);
   }
 }
