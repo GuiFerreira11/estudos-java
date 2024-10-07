@@ -1,7 +1,5 @@
 package br.com.alura.screenmatch.modelos;
 
-import java.util.stream.IntStream;
-
 import br.com.alura.screenmatch.calculos.Classificavel;
 
 public class Episodio implements Classificavel {
