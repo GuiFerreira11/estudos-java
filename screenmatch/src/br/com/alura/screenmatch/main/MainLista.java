@@ -1,6 +1,7 @@
 package br.com.alura.screenmatch.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
@@ -25,6 +26,9 @@ public class MainLista {
         System.out.println("Classificação " + filme.getClassificacao());
       }
     }
+    Collections.sort(lista);
+    System.out.println(lista);
+
 
   }
 }
