@@ -48,4 +48,11 @@ public class Serie extends Titulo {
     return temporadas * episodiosPorTemporada * minutosPorEpisodio;
   }
 
+  @Override
+  public String toString() {
+    return String.format("Série: %s (%d)", getNome(), getAnoDeLancamento());
+  }
+
+
+
 }
