@@ -1,5 +1,7 @@
 package br.com.alura.screenmatch.modelos;
 
+import br.com.alura.screenmatch.modelos.TituloOmdb;
+
 public class Titulo implements Comparable<Titulo> {
   private String nome;
   private int anoDeLancamento;
@@ -11,6 +13,12 @@ public class Titulo implements Comparable<Titulo> {
   public Titulo(String nome, int anoDeLancamento) {
     this.nome = nome;
     this.anoDeLancamento = anoDeLancamento;
+  }
+
+  public Titulo(TituloOmdb tituloOmdb) {
+    this.nome = tituloOmdb.title();
+    this.anoDeLancamento = Integer.valueOf(tituloOmdb.year());
+    this.duracaoEmMinutos = Integer.valueOf(tituloOmdb.runtime().substring(0, 2));
   }
 
   public void setNome(String nome) {
@@ -70,5 +78,10 @@ public class Titulo implements Comparable<Titulo> {
     return this.getNome().compareTo(outroTitulo.getNome());
   }
 
+  @Override
+  public String toString() {
+    return String.format("Nome: %s, Ano de Lançamento: %d, Duração em minutos: %d", this.nome, this.anoDeLancamento,
+        this.duracaoEmMinutos);
+  }
 
 }
