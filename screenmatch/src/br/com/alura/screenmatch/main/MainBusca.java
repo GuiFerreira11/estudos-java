@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.FieldNamingPolicy;
 
+import br.com.alura.screenmatch.exception.ErroDeConversaoAnoException;
 import br.com.alura.screenmatch.modelos.Titulo;
 import br.com.alura.screenmatch.modelos.TituloOmdb;
 
@@ -19,19 +20,30 @@ public class MainBusca {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Digite o filme que deseja buscar");
     String busca = scanner.nextLine();
+    busca = busca.replaceAll(" ", "+");
     String uri = "http://www.omdbapi.com/?apikey=e5a99d20&t=" + busca;
-    HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(uri))
-        .build();
-    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
-    String json = response.body();
+    try {
 
-    Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-    TituloOmdb tituloOmdb = gson.fromJson(json, TituloOmdb.class);
-    Titulo titulo = new Titulo(tituloOmdb);
-    System.out.println(titulo);
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder()
+          .uri(URI.create(uri))
+          .build();
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println(response.body());
+      String json = response.body();
 
+      Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+      TituloOmdb tituloOmdb = gson.fromJson(json, TituloOmdb.class);
+      Titulo titulo = new Titulo(tituloOmdb);
+      System.out.println(titulo);
+
+    } catch (NumberFormatException e) {
+      System.out.println("Ocorreu um erro na formatação de algum número:");
+      System.out.println(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      System.out.println("Verifique o nome do filme digitado, osorreu algum erro com o nome do filme");
+    } catch (ErroDeConversaoAnoException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
