@@ -23,7 +23,7 @@ public class Titulo implements Comparable<Titulo> {
           "Não foi possível converter o ano para int, pois ele tem mais do que 4 caracteres.");
     }
     this.anoDeLancamento = Integer.valueOf(tituloOmdb.year());
-    this.duracaoEmMinutos = Integer.valueOf(tituloOmdb.runtime().substring(0, 3));
+    this.duracaoEmMinutos = Integer.valueOf(tituloOmdb.runtime().substring(0, 2));
   }
 
   public void setNome(String nome) {
